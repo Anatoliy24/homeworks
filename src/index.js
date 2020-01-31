@@ -106,13 +106,23 @@ function returnArgumentsArray() {
 
    console.log(newSum()) выведет 6
  */
-//
-// function bindFunction(fn) {
-// 	function F(a, b) {
-// 		return a + b;
-// 	}
-// 	return F
-// }
+
+function F() {
+    let summa = 0;
+
+    for (let i=0; i < arguments.length; i++) {
+        summa += arguments[i];
+    }
+
+    return summa
+}
+
+function bindFunction(fn) {
+    return function () {
+        return fn.apply(this, arguments);
+
+    }
+}
 
 /**/
 
@@ -122,5 +132,5 @@ export {
     returnArgumentsArray,
     returnFnResult,
     returnCounter,
-    // bindFunction
+    bindFunction
 }
