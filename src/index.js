@@ -108,18 +108,18 @@ function returnArgumentsArray() {
  */
 
 function F() {
-    let summa = 0;
+    let sum = 0;
 
     for (let i=0; i < arguments.length; i++) {
-        summa += arguments[i];
+        sum += arguments[i];
     }
 
-    return summa
+    return sum
 }
 
-function bindFunction(fn) {
+function bindFunction(fn, ...arg) {
     return function () {
-        return fn.apply(this, arguments);
+        return fn.apply(this, arg);
 
     }
 }
