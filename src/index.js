@@ -9,35 +9,10 @@
 
 
 function forEach(array, fn) {
-	// let value;
-    // for (let i=0; i < array.length; i++){
-		// value = array[i];
-		// console.log('value:', value);
-
-	// }
-	// return function(fn,...value){
-	// 	console.log('value1:', value);
-	//
-	// 	return fn()
-	// }
-
+    for (let i=0; i < array.length; i++){
+        fn(array[i], i, array)
+    }
 }
-
-// function sum() {
-// 	let summa = 0;
-// 	for (let i=0; i < arguments.length; i++){
-// 		summa += arguments[i];
-// 	}
-// 	return summa
-//
-// }
-
-
-
-// let array2 = [1, 2, 3, 4];
-//
-// // console.log(sum(array2));
-// console.log(forEach(array2, sum));
 
 
 
@@ -49,6 +24,13 @@ function forEach(array, fn) {
  Посмотрите как работает map и повторите это поведение для массива, который будет передан в параметре array
  */
 function map(array, fn) {
+	let arr = [];
+	for (let i=0; i < array.length; i++){
+		fn(array[i], i, array);
+		arr.push(array[i] * array[i])
+	}
+	return arr;
+
 }
 
 /*
@@ -58,6 +40,12 @@ function map(array, fn) {
  Посмотрите как работает reduce и повторите это поведение для массива, который будет передан в параметре array
  */
 function reduce(array, fn, initial) {
+	// let init = initial;
+	// for (let i=0; i < array.length; i++){
+	// 	fn(init, array[i], i, array);
+	// 	init += array[i]
+	//
+	// }
 }
 
 /*
