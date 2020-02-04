@@ -17,7 +17,7 @@ describe('ДЗ 3 - объекты и массивы', () => {
     describe('forEach', () => {
         it('должна вызывать функцию для каждого элемента массива и передавать элемент первым аргументом', () => {
             let array = randomNumberArray();
-            let passed = [];
+			let passed = [];
 
             forEach(array, el => passed.push(el));
 

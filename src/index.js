@@ -7,15 +7,11 @@
  Посмотрите как работает forEach и повторите это поведение для массива, который будет передан в параметре array
  */
 
-
 function forEach(array, fn) {
-    for (let i=0; i < array.length; i++){
+    for (let i=0; i < array.length; i++) {
         fn(array[i], i, array)
     }
 }
-
-
-
 
 /*
  Задание 2:
@@ -23,14 +19,16 @@ function forEach(array, fn) {
  Напишите аналог встроенного метода map для работы с массивами
  Посмотрите как работает map и повторите это поведение для массива, который будет передан в параметре array
  */
-function map(array, fn) {
-	let arr = [];
-	for (let i=0; i < array.length; i++){
-		fn(array[i], i, array);
-		arr.push(array[i] * array[i])
-	}
-	return arr;
 
+function map(array, fn) {
+    let arr = [];
+
+    for (let i=0; i < array.length; i++) {
+        fn(array[i], i, array);
+        arr.push(array[i] * array[i])
+    }
+
+    return arr;
 }
 
 /*
@@ -40,13 +38,56 @@ function map(array, fn) {
  Посмотрите как работает reduce и повторите это поведение для массива, который будет передан в параметре array
  */
 function reduce(array, fn, initial) {
-	// let init = initial;
-	// for (let i=0; i < array.length; i++){
-	// 	fn(init, array[i], i, array);
-	// 	init += array[i]
+	let previousValue;
+
+	let i;
+	// for (i=0; i < array.length; i++) {
+	// 	previousValue = array[i] + array[i];
+	// 	fn(previousValue, array[i], i, array);
 	//
 	// }
+
+
+	if(initial !== undefined){
+		previousValue = initial;
+
+		for (i=0; i < array.length; i++) {
+            fn(previousValue, array[i], i, array);
+        }
+
+
+	}else{
+        for (i=1; i < array.length; i++) {
+            previousValue = array[0];
+            fn(previousValue, array[i], i, array);
+        }
+
+	}
+
+
+	// let i;
+	//
+	// for (i=0; i < array.length; i++) {
+	//
+	// 	if(initial !== undefined){
+	// 		return previousValue = initial;
+	// 		// fn(previousValue, array[i], i, array);
+	//
+	//
+	// 	}else{
+	// 	    i=1;
+	//        return previousValue = array[0];
+	// 		// fn(previousValue, array[i], i, array);
+	//
+	//
+	// 	}
+	// 	fn(previousValue, array[i], i, array);
+	//
+	// }
+
 }
+
+
 
 /*
  Задание 4:
@@ -58,9 +99,11 @@ function reduce(array, fn, initial) {
  */
 function upperProps(obj) {
     let array = [];
-	for (let key in obj){
-        array.push((key).toUpperCase())
-	}
+
+    for (let key in obj) {
+        array.push((key).toUpperCase());
+    }
+
     return array
 
 }
