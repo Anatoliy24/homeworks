@@ -41,11 +41,6 @@ function reduce(array, fn, initial) {
 	let previousValue;
 
 	let i;
-	// for (i=0; i < array.length; i++) {
-	// 	previousValue = array[i] + array[i];
-	// 	fn(previousValue, array[i], i, array);
-	//
-	// }
 
 
 	if(initial !== undefined){
@@ -57,12 +52,24 @@ function reduce(array, fn, initial) {
 
 
 	}else{
-        for (i=1; i < array.length; i++) {
-            previousValue = array[0];
-            fn(previousValue, array[i], i, array);
-        }
 
+        for (i=1; i < array.length; i++) {
+			let currentItem = array[i];
+			// previousValue = array[0];
+			previousValue = function(currentItem, previousValue){
+				return currentItem + previousValue;
+			};
+			fn(previousValue, currentItem, i, array);
+
+		}
 	}
+
+
+    // for (i=0; i < array.length; i++) {
+	// 	previousValue = array[i] + array[i];
+	// 	fn(previousValue, array[i], i, array);
+	//
+	// }
 
 
 	// let i;
