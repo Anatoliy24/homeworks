@@ -52,45 +52,15 @@ function reduce(array, fn, initial) {
 
 
 	}else{
-
+		previousValue = array[0];
         for (i=1; i < array.length; i++) {
 			let currentItem = array[i];
-			// previousValue = array[0];
-			previousValue = function(currentItem, previousValue){
-				return currentItem + previousValue;
-			};
+
+			previousValue = fn(previousValue, currentItem, i, array);
 			fn(previousValue, currentItem, i, array);
 
 		}
 	}
-
-
-    // for (i=0; i < array.length; i++) {
-	// 	previousValue = array[i] + array[i];
-	// 	fn(previousValue, array[i], i, array);
-	//
-	// }
-
-
-	// let i;
-	//
-	// for (i=0; i < array.length; i++) {
-	//
-	// 	if(initial !== undefined){
-	// 		return previousValue = initial;
-	// 		// fn(previousValue, array[i], i, array);
-	//
-	//
-	// 	}else{
-	// 	    i=1;
-	//        return previousValue = array[0];
-	// 		// fn(previousValue, array[i], i, array);
-	//
-	//
-	// 	}
-	// 	fn(previousValue, array[i], i, array);
-	//
-	// }
 
 }
 
