@@ -38,33 +38,25 @@ function map(array, fn) {
  Посмотрите как работает reduce и повторите это поведение для массива, который будет передан в параметре array
  */
 function reduce(array, fn, initial) {
-	let previousValue;
+    let previousValue;
+    let i;
 
-	let i;
-
-
-	if(initial !== undefined){
-		previousValue = initial;
-
-		for (i=0; i < array.length; i++) {
-            fn(previousValue, array[i], i, array);
+    if (initial !== undefined) {
+        previousValue = initial;
+        for (i=0; i < array.length; i++) {
+            previousValue = fn(previousValue, array[i], i, array);
         }
 
-
-	}else{
-		previousValue = array[0];
+    } else {
+        previousValue = array[0];
         for (i=1; i < array.length; i++) {
-			let currentItem = array[i];
+            previousValue = fn(previousValue, array[i], i, array);
 
-			previousValue = fn(previousValue, currentItem, i, array);
-			fn(previousValue, currentItem, i, array);
+        }
+    }
 
-		}
-	}
-
+    return previousValue
 }
-
-
 
 /*
  Задание 4:
