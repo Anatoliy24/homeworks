@@ -17,32 +17,30 @@
    isAllTrue([100, 2, 3, 4, 5], n => n < 10) // вернет false
  */
 function isAllTrue(array, fn) {
-    let item;
-	for (let i=0; i < array.length; i++) {
-		item = array[i];
-		let fun = fn(item);
-
-		if(fun === false){
-			return false;
-		}
-		try{
-			if(typeof (fun) != 'function'){
-				throw new Error("fn is not a function");
-			}
-            if(array.length == 0 || Array.isArray(array)){
-                throw new Error('empty array')
-            }
-        }catch(e){
-			console.log(e.message);
+    for (let i=0; i < array.length; i++) {
+        if (fn(array[i]) === false) {
+            return false;
         }
+    }
+
+    if (!(array instanceof Array) || array.length === 0) {
+        throw new Error('empty array');
+
+    } else if (typeof fn != 'function') {
+        throw new Error('fn is not a function');
 
     }
-    return true;
+
+    try {
+        return true;
+    } catch (e) {
+        console.log(e.message);
+    }
 
 }
 
 // isAllTrue([1, 2, 3, 4, 5, 6, 12], n => n < 10);
-isAllTrue([], n => n < 10);
+// isAllTrue({}, n => n < 10);
 
 /*
  Задание 2:
@@ -61,8 +59,31 @@ isAllTrue([], n => n < 10);
    isSomeTrue([1, 2, 3, 4, 5], n => n > 20) // вернет false
  */
 function isSomeTrue(array, fn) {
+    for (let i=0; i < array.length; i++) {
+        if (fn(array[i]) === true) {
+            return true;
+        }
+    }
+
+    if (!(array instanceof Array) || array.length === 0) {
+        throw new Error('empty array');
+    } else if (typeof fn != 'function') {
+        throw new Error('fn is not a function');
+
+    }
+
+    try {
+        return false;
+
+    } catch (e) {
+        console.log(e.message);
+    }
+
 }
 
+// let result = isSomeTrue([1, 2, 10, 4, 5], n => n > 20)
+
+// console.log(result);
 /*
  Задание 3:
 
@@ -75,7 +96,32 @@ function isSomeTrue(array, fn) {
    - fn не является функцией (с текстом "fn is not a function")
  */
 function returnBadArguments(fn) {
+	let array = [];
+
+    for (let i = 1; i < arguments.length; i++){
+        fn(arguments[i]);
+	}
+	if (typeof fn != 'function') {
+		throw new Error("fn is not a function");
+	}
+
+    if(arguments.length-1 === 0){
+		return array;
+	}
+
+	try {
+
+		return true
+	}catch(e){
+		array.push(fn);
+		return array;
+		console.log(e.message);
+	}
+
+
+
 }
+// console.log(returnBadArguments((n => a + b)))
 
 /*
  Задание 4:
@@ -94,8 +140,78 @@ function returnBadArguments(fn) {
    - number не является числом (с текстом "number is not a number")
    - какой-либо из аргументов div является нулем (с текстом "division by 0")
  */
-function calculator() {
+function calculator(number = 0) {
+	if (typeof number != 'number') {
+		throw new Error("number is not a number");
+	}
+
+    let obj = {
+	    number,
+        sum:function(){
+			let res = 0;
+			for (let i = 1; i < arguments.length; i++){
+				let res = 0;
+				res += this.number + arguments[i];
+				// return res;
+				// console.log(res);
+			}
+			return res;
+
+		},
+		dif(){
+			let res = 0;
+			for (let i = 1; i < arguments.length; i++){
+				res += this.number - arguments[i];
+			}
+			return res;
+        },
+		div(){
+			for (let i = 1; i < arguments.length; i++){
+				number += number / arguments[i];
+				if (arguments[i] === 0){
+					throw new Error("division by 0");
+				}
+			}
+			return number;
+        },
+		mul(){
+			// for (let i = 1; i < arguments.length; i++){
+			// 	number += number * arguments[i];
+			// }
+			// return number;
+        },
+
+    }
+
+
+
+	try {
+		return obj
+
+	}catch(e){
+		console.log(e.message);
+	}
+
+
+	//
+	// function fn(array){
+	 //    let sum = 0;
+	 //    let number = 2;
+	 //    for (let i = 0; i < array.length; i++){
+		// 	sum += arguments[i];
+		// 	console.log(sum)
+	//
+	 //    }
+		// return number - sum;
+	//
+	// }
+    // console.log(fn([1,2,3]))
+
 }
+
+console.log(calculator(13, 12, 11));
+
+
 
 /* При решении задач, пострайтесь использовать отладчик */
 
