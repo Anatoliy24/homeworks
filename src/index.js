@@ -97,26 +97,26 @@ function isSomeTrue(array, fn) {
  */
 function returnBadArguments(fn) {
 	let array = [];
-
-    for (let i = 1; i < arguments.length; i++){
-        fn(arguments[i]);
+    if (typeof fn != 'function') {
+        throw new Error("fn is not a function");
+    }
+	for (let i = 1; i < arguments.length; i++){
+		try {
+			fn(arguments[i]);
+		}catch(e){
+			array.push(arguments[i]);
+		}
 	}
-	if (typeof fn != 'function') {
-		throw new Error("fn is not a function");
-	}
 
-    if(arguments.length-1 === 0){
+	if(arguments.length-1 === 0){
 		return array;
 	}
 
-	try {
+	return array;
 
-		return true
-	}catch(e){
-		array.push(fn);
-		return array;
-		console.log(e.message);
-	}
+
+
+
 
 
 
