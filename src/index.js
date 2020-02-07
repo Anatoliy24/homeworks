@@ -150,7 +150,6 @@ function calculator(number = 0) {
         sum:function(){
 			let res = 0;
 			for (let i = 1; i < arguments.length; i++){
-				let res = 0;
 				res += this.number + arguments[i];
 				// return res;
 				// console.log(res);
@@ -166,19 +165,21 @@ function calculator(number = 0) {
 			return res;
         },
 		div(){
+			let res = 0;
 			for (let i = 1; i < arguments.length; i++){
-				number += number / arguments[i];
+				res += number / arguments[i];
 				if (arguments[i] === 0){
 					throw new Error("division by 0");
 				}
 			}
-			return number;
+			return res;
         },
 		mul(){
-			// for (let i = 1; i < arguments.length; i++){
-			// 	number += number * arguments[i];
-			// }
-			// return number;
+			let res = 0;
+			for (let i = 1; i < arguments.length; i++){
+				res += number * arguments[i];
+			}
+			return res;
         },
 
     }
