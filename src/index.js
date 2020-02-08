@@ -141,50 +141,47 @@ function returnBadArguments(fn) {
    - какой-либо из аргументов div является нулем (с текстом "division by 0")
  */
 function calculator(number = 0) {
-	if (typeof number != 'number') {
-		throw new Error("number is not a number");
-	}
+
 
     let obj = {
-	    number,
-        sum:function(){
+        sum(){
 			let res = 0;
 			for (let i = 1; i < arguments.length; i++){
-				res += this.number + arguments[i];
-				// return res;
-				// console.log(res);
+				res += number + arguments[i];
 			}
 			return res;
 
 		},
-		dif(){
-			let res = 0;
-			for (let i = 1; i < arguments.length; i++){
-				res += this.number - arguments[i];
-			}
-			return res;
-        },
-		div(){
-			let res = 0;
-			for (let i = 1; i < arguments.length; i++){
-				res += number / arguments[i];
-				if (arguments[i] === 0){
-					throw new Error("division by 0");
-				}
-			}
-			return res;
-        },
-		mul(){
-			let res = 0;
-			for (let i = 1; i < arguments.length; i++){
-				res += number * arguments[i];
-			}
-			return res;
-        },
+		// dif(){
+			// let res = 0;
+			// for (let i = 1; i < arguments.length; i++){
+			// 	res += this.number - arguments[i];
+			// }
+			// return res;
+        // },
+		// div(){
+			// let res = 0;
+			// for (let i = 1; i < arguments.length; i++){
+			// 	res += number / arguments[i];
+			// 	if (arguments[i] === 0){
+			// 		throw new Error("division by 0");
+			// 	}
+			// }
+			// return res;
+        // },
+		// mul(){
+			// let res = 0;
+			// for (let i = 1; i < arguments.length; i++){
+			// 	res += number * arguments[i];
+			// }
+			// return res;
+        // },
 
     }
 
-
+	if (typeof number != 'number') {
+		throw new Error("number is not a number");
+	}
 
 	try {
 		return obj
