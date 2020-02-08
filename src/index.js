@@ -31,12 +31,7 @@ function isAllTrue(array, fn) {
 
     }
 
-    try {
-        return true;
-
-    } catch (e) {
-        // continue regardless of error
-    }
+    return true
 
 }
 
@@ -70,13 +65,7 @@ function isSomeTrue(array, fn) {
 
     }
 
-    try {
-        return false;
-
-    } catch (e) {
-        // continue regardless of error
-    }
-
+    return false
 }
 
 /*
