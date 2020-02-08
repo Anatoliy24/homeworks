@@ -17,25 +17,25 @@
    isAllTrue([100, 2, 3, 4, 5], n => n < 10) // вернет false
  */
 function isAllTrue(array, fn) {
-    for (let i=0; i < array.length; i++) {
-        if (fn(array[i]) === false) {
-            return false;
-        }
-    }
+	for (let i=0; i < array.length; i++) {
+		if (fn(array[i]) === false) {
+			return false;
+		}
+	}
 
-    if (!(array instanceof Array) || array.length === 0) {
-        throw new Error('empty array');
+	if (!(array instanceof Array) || array.length === 0) {
+		throw new Error('empty array');
 
-    } else if (typeof fn != 'function') {
-        throw new Error('fn is not a function');
+	} else if (typeof fn != 'function') {
+		throw new Error('fn is not a function');
 
-    }
+	}
 
-    try {
-        return true;
-    } catch (e) {
+	try {
+		return true;
+	} catch (e) {
 
-    }
+	}
 
 }
 
@@ -56,25 +56,25 @@ function isAllTrue(array, fn) {
    isSomeTrue([1, 2, 3, 4, 5], n => n > 20) // вернет false
  */
 function isSomeTrue(array, fn) {
-    for (let i=0; i < array.length; i++) {
-        if (fn(array[i]) === true) {
-            return true;
-        }
-    }
+	for (let i=0; i < array.length; i++) {
+		if (fn(array[i]) === true) {
+			return true;
+		}
+	}
 
-    if (!(array instanceof Array) || array.length === 0) {
-        throw new Error('empty array');
-    } else if (typeof fn != 'function') {
-        throw new Error('fn is not a function');
+	if (!(array instanceof Array) || array.length === 0) {
+		throw new Error('empty array');
+	} else if (typeof fn != 'function') {
+		throw new Error('fn is not a function');
 
-    }
+	}
 
-    try {
-        return false;
+	try {
+		return false;
 
-    } catch (e) {
+	} catch (e) {
 
-    }
+	}
 
 }
 
@@ -137,35 +137,34 @@ function calculator(number = 0) {
 	}
 
 	let obj = {
-		sum(){
-			for (let i = 0; i < arguments.length; i++){
+		sum() {
+			for (let i = 0; i < arguments.length; i++) {
 				number += arguments[i];
 			}
-			return  number;
+			return number;
 		},
-		dif(){
-			for (let i = 0; i < arguments.length; i++){
+		dif() {
+			for (let i = 0; i < arguments.length; i++) {
 				number -= arguments[i];
 			}
-			return  number;
+			return number;
 		},
-		div(){
-			for (let i = 0; i < arguments.length; i++){
-				if (arguments[i] === 0){
+		div() {
+			for (let i = 0; i < arguments.length; i++) {
+				if (arguments[i] === 0) {
 					throw new Error("division by 0");
 				}
 				number /= arguments[i];
 			}
 			return number;
 		},
-		mul(){
-			for (let i = 0; i < arguments.length; i++){
+		mul() {
+			for (let i = 0; i < arguments.length; i++) {
 				number *= arguments[i];
 			}
 			return number;
 		},
-	}
-
+	};
 	return obj
 }
 
