@@ -142,7 +142,9 @@ function returnBadArguments(fn) {
  */
 function calculator(number = 0) {
 
-
+	if (typeof number != 'number') {
+		throw new Error("number is not a number");
+	}
     let obj = {
         sum(){
 			let res = 0;
@@ -150,64 +152,36 @@ function calculator(number = 0) {
 				res += number + arguments[i];
 			}
 			return res;
-
 		},
-		// dif(){
-			// let res = 0;
-			// for (let i = 1; i < arguments.length; i++){
-			// 	res += this.number - arguments[i];
-			// }
-			// return res;
-        // },
-		// div(){
-			// let res = 0;
-			// for (let i = 1; i < arguments.length; i++){
-			// 	res += number / arguments[i];
-			// 	if (arguments[i] === 0){
-			// 		throw new Error("division by 0");
-			// 	}
-			// }
-			// return res;
-        // },
-		// mul(){
-			// let res = 0;
-			// for (let i = 1; i < arguments.length; i++){
-			// 	res += number * arguments[i];
-			// }
-			// return res;
-        // },
+		dif(){
+			let res = 0;
+			for (let i = 1; i < arguments.length; i++){
+				res += number - arguments[i];
+			}
+			return res;
+        },
+		div(){
+			let res = 0;
+			for (let i = 1; i < arguments.length; i++){
+				if (arguments[i] === 0){
+					throw new Error("division by 0");
+				}
+				res += number / arguments[i];
+			}
+			return res;
+        },
+		mul(){
+			let res = 0;
+			for (let i = 1; i < arguments.length; i++){
+				res += number * arguments[i];
+			}
+			return res;
+        },
+    };
 
-    }
-
-	if (typeof number != 'number') {
-		throw new Error("number is not a number");
-	}
-
-	try {
-		return obj
-
-	}catch(e){
-		console.log(e.message);
-	}
-
-
-	//
-	// function fn(array){
-	 //    let sum = 0;
-	 //    let number = 2;
-	 //    for (let i = 0; i < array.length; i++){
-		// 	sum += arguments[i];
-		// 	console.log(sum)
-	//
-	 //    }
-		// return number - sum;
-	//
-	// }
-    // console.log(fn([1,2,3]))
-
+	return obj
 }
 
-console.log(calculator(13, 12, 11));
 
 
 
