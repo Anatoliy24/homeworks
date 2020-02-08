@@ -34,13 +34,10 @@ function isAllTrue(array, fn) {
     try {
         return true;
     } catch (e) {
-        console.log(e.message);
+
     }
 
 }
-
-// isAllTrue([1, 2, 3, 4, 5, 6, 12], n => n < 10);
-// isAllTrue({}, n => n < 10);
 
 /*
  Задание 2:
@@ -76,14 +73,11 @@ function isSomeTrue(array, fn) {
         return false;
 
     } catch (e) {
-        console.log(e.message);
+
     }
 
 }
 
-// let result = isSomeTrue([1, 2, 10, 4, 5], n => n > 20)
-
-// console.log(result);
 /*
  Задание 3:
 
@@ -96,14 +90,16 @@ function isSomeTrue(array, fn) {
    - fn не является функцией (с текстом "fn is not a function")
  */
 function returnBadArguments(fn) {
+
 	let array = [];
-    if (typeof fn != 'function') {
-        throw new Error("fn is not a function");
-    }
-	for (let i = 1; i < arguments.length; i++){
+	if (typeof fn != 'function') {
+		throw new Error("fn is not a function");
+	}
+
+	for (let i = 1; i < arguments.length; i++) {
 		try {
 			fn(arguments[i]);
-		}catch(e){
+		} catch(e) {
 			array.push(arguments[i]);
 		}
 	}
@@ -113,12 +109,6 @@ function returnBadArguments(fn) {
 	}
 
 	return array;
-
-
-
-
-
-
 
 }
 // console.log(returnBadArguments((n => a + b)))
@@ -145,45 +135,39 @@ function calculator(number = 0) {
 	if (typeof number != 'number') {
 		throw new Error("number is not a number");
 	}
-    let obj = {
-        sum(){
-			let res = 0;
-			for (let i = 1; i < arguments.length; i++){
-				res += number + arguments[i];
+
+	let obj = {
+		sum(){
+			for (let i = 0; i < arguments.length; i++){
+				number += arguments[i];
 			}
-			return res;
+			return  number;
 		},
 		dif(){
-			let res = 0;
-			for (let i = 1; i < arguments.length; i++){
-				res += number - arguments[i];
+			for (let i = 0; i < arguments.length; i++){
+				number -= arguments[i];
 			}
-			return res;
-        },
+			return  number;
+		},
 		div(){
-			let res = 0;
-			for (let i = 1; i < arguments.length; i++){
+			for (let i = 0; i < arguments.length; i++){
 				if (arguments[i] === 0){
 					throw new Error("division by 0");
 				}
-				res += number / arguments[i];
+				number /= arguments[i];
 			}
-			return res;
-        },
+			return number;
+		},
 		mul(){
-			let res = 0;
-			for (let i = 1; i < arguments.length; i++){
-				res += number * arguments[i];
+			for (let i = 0; i < arguments.length; i++){
+				number *= arguments[i];
 			}
-			return res;
-        },
-    };
+			return number;
+		},
+	}
 
 	return obj
 }
-
-
-
 
 /* При решении задач, пострайтесь использовать отладчик */
 
