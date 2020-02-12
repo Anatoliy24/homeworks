@@ -127,51 +127,19 @@ function deleteTextNodes(where) {
    После выполнения функции, дерево <span> <div> <b>привет</b> </div> <p>loftchool</p> !!!</span>
    должно быть преобразовано в <span><div><b></b></div><p></p></span>
  */
-// function deleteTextNodesRecursive(where) {
-// 	for (let child of where.childNodes) {
-// 		if(child.nodeType == 3) {
-// 			child.remove();
-// 		}
-// 		if(child.firstElementChild != null){
-// 			deleteTextNodesRecursive(child.firstElementChild)
-//
-// 		}
-// 	}
-// }
-
-
-// function deleteTextNodesRecursive(where) {
-// 	for (let child of where.childNodes) {
-// 		if(child.nodeType == 3) {
-// 			child.remove();
-// 		}
-// 		// console.log('child', child)
-// 		if(child.firstChild != null){
-// 			// console.log('Есть елементы', child)
-// 			return deleteTextNodesRecursive(child)
-// 		}
-//
-//
-// 	}
-// }
-//
 
 function deleteTextNodesRecursive(where) {
-    console.log('childNodes', where.childNodes);
     for (let child of where.childNodes) {
-         if (child.nodeType == 3) {
-           child.remove();
-         }
-        console.log('child', child);
         if (child.hasChildNodes) {
-            console.log('Есть элементы', child);
             deleteTextNodesRecursive(child);
         }
-
-
+    }
+    for (let child of where.childNodes) {
+        if (child.nodeType == 3) {
+            child.remove();
+        }
     }
 }
-
 
 /*
  Задание 7 *:
