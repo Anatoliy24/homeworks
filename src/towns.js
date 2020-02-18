@@ -36,8 +36,47 @@ const homeworkContainer = document.querySelector('#homework-container');
  Массив городов пожно получить отправив асинхронный запрос по адресу
  https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json
  */
+
+
+
 function loadTowns() {
+    let promise = new Promise(function (resolve) {
+
+        let towns;
+
+        let xhr = new XMLHttpRequest();
+
+        xhr.open('GET', 'https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json', true);
+        xhr.responseType = 'json';
+
+        xhr.onload = function(){
+            towns = xhr.response;
+            towns.sort((a, b) => {
+                if(a.name < b.name) return -1;
+                if(a.name > b.name) return 1;
+            });
+            resolve(towns);
+            let loader = document.querySelector('#loading-block');
+            let inputs = document.querySelector('#filter-block');
+            loader.style.display = "none";
+            inputs.style.display = "block";
+            for(const town of towns){
+                let li = document.createElement('li');
+                let list = document.querySelector('#filter-result');
+                li.textContent = town.name;
+                list.appendChild(li)
+
+            }
+        };
+        xhr.send();
+    });
+    return promise;
+
+
 }
+loadTowns().then(towns => console.log(towns)) // должна вывести в консоль отсортированный массив городов
+
+
 
 /*
  Функция должна проверять встречается ли подстрока chunk в строке full
