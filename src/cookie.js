@@ -43,43 +43,45 @@ const addButton = homeworkContainer.querySelector('#add-button');
 // таблица со списком cookie
 const listTable = homeworkContainer.querySelector('#list-table tbody');
 
+function getCookies() {
+    return document.cookie.split('; ').reduce((prev, current) => {
+        const [name, value] = current.split('=');
 
-let cookie = document.cookie.split('; ').reduce((prev, current) => {
-    const [name, value] = current.split('=');
-    prev[name] = value;
-    return prev;
-}, {});
+        prev[name] = value;
+
+        return prev;
+    }, {});
+}
+
 // console.log(cookie);
 
 function showCookies(filter) {
+
+    let cookie = getCookies();
+
     listTable.innerHTML = '';
     Object.keys(cookie).forEach(item => {
-        // console.log(cookie[item]);
-        if (isMatching(cookie[item], filter) || isMatching(item, filter)){
+        if (isMatching(cookie[item], filter) || isMatching(item, filter)) {
             createTable(item, cookie[item])
         }
     })
 }
 
-filterNameInput.addEventListener('keyup', function() {
-    showCookies(filterNameInput.value);
-});
+function createTable(name, value) {
+    let addNameInputValue = name;
 
-
-
-function isMatching(full, chunk) {
-    return full.toLowerCase().includes(chunk.toLowerCase());
-}
-
-
-function createTable(name, value){
-    let addNameInputValue =  name;
     let addValueInputValue = value;
-    let addTr = document.createElement("tr");
-    let addTd1 = document.createElement("td");
-    let addTd2 = document.createElement("td");
-    let addTd3 = document.createElement("td");
-    let button = document.createElement("button");
+
+    let addTr = document.createElement('tr');
+
+    let addTd1 = document.createElement('td');
+
+    let addTd2 = document.createElement('td');
+
+    let addTd3 = document.createElement('td');
+
+    let button = document.createElement('button');
+
     button.id = 'delete';
     button.innerHTML = 'Удалить';
 
@@ -90,39 +92,24 @@ function createTable(name, value){
     addTr.appendChild(addTd2);
     addTr.appendChild(addTd3);
     listTable.appendChild(addTr);
+    button.addEventListener('click', function() {
+        let tr = button.closest('tr');
+
+        listTable.removeChild(tr);
+        document.cookie = `${name}=;expires=${new Date(0)}`;
+    })
+
 }
 
+function isMatching(full, chunk) {
+    return full.toLowerCase().includes(chunk.toLowerCase());
+}
 
-
-
-
-
+filterNameInput.addEventListener('keyup', function() {
+    showCookies(filterNameInput.value);
+});
 
 addButton.addEventListener('click', () => {
     document.cookie = `${addNameInput.value}=${addValueInput.value}`;
-
-    // createTable(addNameInput.value, addValueInput.value);
-
     showCookies(filterNameInput.value);
-
-
-    // console.log(cookie.name)
-
-
-    listTable.addEventListener('click', function(e) {
-        // const deleteButton = homeworkContainer.querySelector('#delete');
-        // console.log(deleteButton);
-        listTable.innerHTML = '';
-        if(e.target.closest('#delete')){
-            e.target.closest('tr').remove()
-        }
-
-        document.cookie = addNameInput.value + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-        document.cookie = addValueInput.value + '=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-    })
-
-
 });
-
-
-
