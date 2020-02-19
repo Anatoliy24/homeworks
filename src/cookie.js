@@ -43,16 +43,29 @@ const addButton = homeworkContainer.querySelector('#add-button');
 // таблица со списком cookie
 const listTable = homeworkContainer.querySelector('#list-table tbody');
 
-filterNameInput.addEventListener('keyup', function() {
-    showCookies(filterNameInput.value);
-});
 
 let cookie = document.cookie.split('; ').reduce((prev, current) => {
     const [name, value] = current.split('=');
     prev[name] = value;
     return prev;
 }, {});
-console.log(cookie);
+// console.log(cookie);
+
+function showCookies(filter) {
+    listTable.innerHTML = '';
+    Object.keys(cookie).forEach(item => {
+        // console.log(cookie[item]);
+        if (isMatching(cookie[item], filter) || isMatching(item, filter)){
+            createTable(item, cookie[item])
+        }
+    })
+}
+
+filterNameInput.addEventListener('keyup', function() {
+    showCookies(filterNameInput.value);
+});
+
+
 
 function isMatching(full, chunk) {
     return full.toLowerCase().includes(chunk.toLowerCase());
@@ -81,15 +94,7 @@ function createTable(name, value){
 
 
 
-function showCookies(filter) {
-    listTable.innerHTML = '';
-    Object.keys(cookie).forEach(item => {
-        console.log(cookie[item]);
-        if (isMatching(cookie[item], filter) || isMatching(item, filter)){
-            createTable(item, cookie[item])
-        }
-    })
-}
+
 
 
 
@@ -103,7 +108,10 @@ addButton.addEventListener('click', () => {
 
     // console.log(cookie.name)
 
+
+
 });
+
 
 
 
@@ -118,5 +126,3 @@ listTable.addEventListener('click', function(e) {
     document.cookie = addNameInput.value + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     document.cookie = addValueInput.value + '=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 })
-
-
