@@ -1,3 +1,5 @@
+import { loadAndSortTowns } from './index'
+
 /*
  Страница должна предварительно загрузить список городов из
  https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json
@@ -37,46 +39,21 @@ const homeworkContainer = document.querySelector('#homework-container');
  https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json
  */
 
-
-
 function loadTowns() {
-    let promise = new Promise(function (resolve) {
-
-        let towns;
-
-        let xhr = new XMLHttpRequest();
-
-        xhr.open('GET', 'https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json', true);
-        xhr.responseType = 'json';
-
-        xhr.onload = function(){
-            towns = xhr.response;
-            towns.sort((a, b) => {
-                if(a.name < b.name) return -1;
-                if(a.name > b.name) return 1;
-            });
-            resolve(towns);
-            let loader = document.querySelector('#loading-block');
-            let inputs = document.querySelector('#filter-block');
-            loader.style.display = "none";
-            inputs.style.display = "block";
-            for(const town of towns){
-                let li = document.createElement('li');
-                let list = document.querySelector('#filter-result');
-                li.textContent = town.name;
-                list.appendChild(li)
-
-            }
-        };
-        xhr.send();
-    });
-    return promise;
-
-
+    return loadAndSortTowns()
 }
-loadTowns().then(towns => console.log(towns)) // должна вывести в консоль отсортированный массив городов
 
+let arr = [];
 
+loadTowns()
+    .then(function(towns) {
+        // let loadingBlock = document.querySelector('#loading-block');
+        // let filterBlock = document.querySelector('#filter-block');
+
+        loadingBlock.style.display = 'none';
+        filterBlock.style.display = 'block';
+        arr = towns;
+    });
 
 /*
  Функция должна проверять встречается ли подстрока chunk в строке full
@@ -90,19 +67,40 @@ loadTowns().then(towns => console.log(towns)) // должна вывести в 
    isMatching('Moscow', 'Moscov') // false
  */
 function isMatching(full, chunk) {
+    return full.toLowerCase().includes(chunk.toLowerCase());
 }
 
 /* Блок с надписью "Загрузка" */
+
 const loadingBlock = homeworkContainer.querySelector('#loading-block');
+
 /* Блок с текстовым полем и результатом поиска */
+
 const filterBlock = homeworkContainer.querySelector('#filter-block');
+
 /* Текстовое поле для поиска по городам */
+
 const filterInput = homeworkContainer.querySelector('#filter-input');
+
 /* Блок с результатами поиска */
+
 const filterResult = homeworkContainer.querySelector('#filter-result');
 
-filterInput.addEventListener('keyup', function() {
-    // это обработчик нажатия кливиш в текстовом поле
+filterInput.addEventListener('keyup', function(event) {
+    for (const town of arr) {
+        if (isMatching(town.name, event.key) === true) {
+
+            let li = document.createElement('li');
+
+            let filterResult = document.querySelector('#filter-result');
+
+            li.textContent = town.name;
+            filterResult.appendChild(li)
+        }
+        if (filterInput.value == '') {
+            filterResult.innerHTML = ''
+        }
+    }
 });
 
 export {
