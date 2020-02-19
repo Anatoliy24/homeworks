@@ -52,13 +52,9 @@ let cookie = document.cookie.split('; ').reduce((prev, current) => {
     prev[name] = value;
     return prev;
 }, {});
-console.log(cookie.dfgd);
+console.log(cookie);
 
-
-addButton.addEventListener('click', () => {
-    // здесь можно обработать нажатие на кнопку "добавить cookie"
-
-    document.cookie = `${addNameInput.value}=${addValueInput.value}`;
+function createTable(name, value){
     let addNameInputValue =  addNameInput.value;
     let addValueInputValue = addValueInput.value;
     let addTr = document.createElement("tr");
@@ -76,9 +72,16 @@ addButton.addEventListener('click', () => {
     addTr.appendChild(addTd2);
     addTr.appendChild(addTd3);
     listTable.appendChild(addTr);
+}
+
+
+
+addButton.addEventListener('click', () => {
+    document.cookie = `${addNameInput.value}=${addValueInput.value}`;
+
+    createTable(addNameInput.value, addValueInput.value)
+
     // if(addNameInputValue)
-
-
 
     listTable.addEventListener('click', function(e) {
         // const deleteButton = homeworkContainer.querySelector('#delete');
