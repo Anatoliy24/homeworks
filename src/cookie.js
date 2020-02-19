@@ -54,9 +54,14 @@ let cookie = document.cookie.split('; ').reduce((prev, current) => {
 }, {});
 console.log(cookie);
 
+function isMatching(full, chunk) {
+    return full.toLowerCase().includes(chunk.toLowerCase());
+}
+
+
 function createTable(name, value){
-    let addNameInputValue =  addNameInput.value;
-    let addValueInputValue = addValueInput.value;
+    let addNameInputValue =  name;
+    let addValueInputValue = value;
     let addTr = document.createElement("tr");
     let addTd1 = document.createElement("td");
     let addTd2 = document.createElement("td");
@@ -76,12 +81,20 @@ function createTable(name, value){
 
 
 
+// function showCookies(filter) {
+//     Object.keys(cookie).forEach(item => {
+//         console.log(cookie[item]);
+//         if (isMatching(cookie[item], filter) || isMatching(item, filter)){
+//
+//         }
+//     })
+// }
+
 addButton.addEventListener('click', () => {
     document.cookie = `${addNameInput.value}=${addValueInput.value}`;
 
-    createTable(addNameInput.value, addValueInput.value)
+    createTable(addNameInput.value, addValueInput.value);
 
-    // if(addNameInputValue)
 
     listTable.addEventListener('click', function(e) {
         // const deleteButton = homeworkContainer.querySelector('#delete');
