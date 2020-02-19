@@ -77,6 +77,9 @@ addButton.addEventListener('click', () => {
     addTr.appendChild(addTd3);
     listTable.appendChild(addTr);
     // if(addNameInputValue)
+
+
+
     listTable.addEventListener('click', function(e) {
         // const deleteButton = homeworkContainer.querySelector('#delete');
         // console.log(deleteButton);
