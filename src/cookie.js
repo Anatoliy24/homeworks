@@ -109,20 +109,20 @@ addButton.addEventListener('click', () => {
     // console.log(cookie.name)
 
 
+    listTable.addEventListener('click', function(e) {
+        // const deleteButton = homeworkContainer.querySelector('#delete');
+        // console.log(deleteButton);
+        listTable.innerHTML = '';
+        if(e.target.closest('#delete')){
+            e.target.closest('tr').remove()
+        }
+
+        document.cookie = addNameInput.value + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        document.cookie = addValueInput.value + '=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    })
+
 
 });
 
 
 
-
-listTable.addEventListener('click', function(e) {
-    // const deleteButton = homeworkContainer.querySelector('#delete');
-    // console.log(deleteButton);
-    listTable.innerHTML = '';
-    if(e.target.closest('#delete')){
-        e.target.closest('tr').remove()
-    }
-
-    document.cookie = addNameInput.value + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-    document.cookie = addValueInput.value + '=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-})
