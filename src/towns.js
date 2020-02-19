@@ -47,9 +47,6 @@ let arr = [];
 
 loadTowns()
     .then(function(towns) {
-        // let loadingBlock = document.querySelector('#loading-block');
-        // let filterBlock = document.querySelector('#filter-block');
-
         loadingBlock.style.display = 'none';
         filterBlock.style.display = 'block';
         arr = towns;
@@ -86,16 +83,11 @@ const filterInput = homeworkContainer.querySelector('#filter-input');
 
 const filterResult = homeworkContainer.querySelector('#filter-result');
 
-filterInput.addEventListener('keyup', function(event) {
-    console.log(event.key.toString());
-    // let currentKey = event.key;
-    // let str = '';
-    // str += currentKey;
-    // console.log(str)
+filterInput.addEventListener('keyup', function() {
+    filterResult.innerHTML = '';
     for (const town of arr) {
 
-        if (isMatching(town.name, event.key) === true) {
-            // filterResult.innerHTML = '';
+        if (isMatching(town.name, filterInput.value) === true) {
 
             let li = document.createElement('li');
 
